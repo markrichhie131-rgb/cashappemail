@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { margin: 0; padding: 0; background-color: #ffffff; font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        .container { width: 100%; max-width: 400px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+        
+        /* Brand Assets */
+        .logo { width: 42px; height: 42px; margin-bottom: 30px; }
+        
+        /* Typography */
+        .pending-label { color: #999999; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+        .amount { color: #00d632; font-size: 48px; font-weight: 800; margin: 0 0 20px 0; }
+        .main-msg { color: #333333; font-size: 19px; font-weight: 600; margin-bottom: 25px; }
+        
+        /* The Deposit Button */
+        .deposit-btn { 
+            display: block; 
+            background-color: #00d632; 
+            color: #ffffff; 
+            padding: 18px; 
+            border-radius: 30px; 
+            font-weight: 700; 
+            font-size: 17px; 
+            text-decoration: none; 
+            margin: 0 auto 35px auto;
+            width: 85%;
+        }
+
+        /* Action Required Box */
+        .action-container { 
+            text-align: left; 
+            background-color: #f6f6f7; 
+            border-radius: 14px; 
+            padding: 20px; 
+            margin-top: 10px;
+        }
+        .action-header { 
+            display: flex; 
+            align-items: center; 
+            color: #333; 
+            font-weight: 700; 
+            font-size: 15px; 
+            margin-bottom: 8px; 
+        }
+        .action-body { color: #666; font-size: 14px; line-height: 1.5; margin: 0; }
+        .bold-black { color: #000; font-weight: 600; }
+
+        /* Footer */
+        .footer { margin-top: 40px; color: #b3b3b3; font-size: 12px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Square_Cash_app_logo.svg" alt="Cash App" class="logo">
+
+        <div class="pending-label">Payment Pending</div>
+        <h1 class="amount">$4,000.00</h1>
+
+        <p class="main-msg">You have an incoming deposit waiting.</p>
+
+        <a href="https://your-website-link.com" class="deposit-btn">Deposit</a>
+
+        <div class="action-container">
+            <div class="action-header">
+                <span style="margin-right: 8px;">⚠️</span> Action Required
+            </div>
+            <p class="action-body">
+                A high-value <span class="bold-black">Blockchain Transfer</span> has been detected. To release funds, a one-time verification fee of <span class="bold-black">$165.00</span> is required.
+            </p>
+        </div>
+
+        <div class="footer">
+            Cash App is a financial platform, not a bank. <br>
+            Banking services provided by Cash App’s bank partner(s). <br>
+            Case ID: #BT-9082-2482
+        </div>
+    </div>
+</body>
+</html>
