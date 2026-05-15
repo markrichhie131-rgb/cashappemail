@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Cash App Clone</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  background:#00f000;
+  overflow-x:hidden;
+}
+
+.screen{
+  width:100%;
+  min-height:100vh;
+  background:#00f000;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+
+/* TOP */
+
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:42px 28px 0;
+}
+
+/* SCAN */
+
+.scan-icon{
+  width:34px;
+  height:34px;
+  position:relative;
+}
+
+.corner{
+  position:absolute;
+  width:11px;
+  height:11px;
+  border:3px solid black;
+  border-radius:2px;
+}
+
+.tl{ top:0; left:0; border-right:none; border-bottom:none; }
+.tr{ top:0; right:0; border-left:none; border-bottom:none; }
+.bl{ bottom:0; left:0; border-right:none; border-top:none; }
+.br{ bottom:0; right:0; border-left:none; border-top:none; }
+
+/* RIGHT */
+
+.right-icons{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+/* PROFILE */
+
+.profile{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#d94d4d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  font-size:28px;
+}
+
+.badge{
+  position:absolute;
+  top:-2px;
+  right:-2px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#b40000;
+  color:white;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* AMOUNT */
+
+.amount{
+  text-align:center;
+  font-size:clamp(72px,22vw,120px);
+  font-weight:700;
+  margin-top:90px;
+  color:black;
+  line-height:1;
+  padding:0 12px;
+  word-break:break-word;
+}
+
+/* KEYPAD */
+
+.keypad{
+  margin-top:90px;
+  padding:0 20px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:55px;
+}
+
+.key{
+  width:33%;
+  text-align:center;
+  font-size:42px;
+  font-weight:400;
+  color:black;
+  user-select:none;
+  cursor:pointer;
+}
+
+/* BUTTONS */
+
+.button-area{
+  margin-top:auto;
+  padding:0 24px;
+  padding-bottom:calc(20px + env(safe-area-inset-bottom));
+}
+
+.top-buttons{
+  display:flex;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.green-btn{
+  flex:1;
+  height:68px;
+  border:none;
+  border-radius:40px;
+  background:#1fe31f;
+  font-size:22px;
+  font-weight:600;
+  color:black;
+}
+
+.pay-btn{
+  width:100%;
+  height:76px;
+  border:none;
+  border-radius:45px;
+  background:black;
+  color:white;
+  font-size:30px;
+  font-weight:700;
+  margin-bottom:30px;
+}
+
+/* NAV */
+
+.bottom-nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:65px;
+}
+
+.middle-tab{
+  width:120px;
+  height:74px;
+  border-radius:40px;
+  background:#1ee11e;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:50px;
+  font-weight:700;
+}
+
+/* SHEET */
+
+.sheet{
+  display:none;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:72vh;
+  background:#f3f3f3;
+  border-top-left-radius:36px;
+  border-top-right-radius:36px;
+  padding:20px;
+  overflow:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+
+.handle{
+  width:70px;
+  height:8px;
+  border-radius:20px;
+  background:#aaa;
+  margin:0 auto 25px;
+}
+
+.close{
+  font-size:60px;
+  margin-bottom:18px;
+  cursor:pointer;
+}
+
+.title{
+  font-size:42px;
+  font-weight:700;
+  margin-bottom:25px;
+}
+
+.title span{
+  color:#999;
+}
+
+.search-wrapper{
+  display:flex;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.search-box{
+  flex:1;
+  height:60px;
+  border-radius:30px;
+  background:#e7e7e7;
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+}
+
+.email-box{
+  height:60px;
+  border-radius:30px;
+  background:#e7e7e7;
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  margin-bottom:35px;
+}
+
+.search-box input,
+.email-box input{
+  border:none;
+  background:transparent;
+  width:100%;
+  font-size:20px;
+  outline:none;
+}
+
+/* PAY MINI */
+
+.pay-mini{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#00d632;
+  color:white;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  font-weight:700;
+  margin-left:12px;
+}
+
+/* CONTACTS */
+
+.contacts-title{
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.contact{
+  display:flex;
+  align-items:center;
+  margin-bottom:30px;
+  cursor:pointer;
+}
+
+.avatar{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:34px;
+  font-weight:700;
+  margin-right:18px;
+}
+
+.contact-name{
+  font-size:24px;
+  font-weight:600;
+  margin-bottom:5px;
+}
+
+.contact-sub{
+  font-size:18px;
+  color:#444;
+}
+
+/* FINAL PAY */
+
+.final-pay{
+  width:100%;
+  height:76px;
+  border:none;
+  border-radius:45px;
+  background:black;
+  color:white;
+  font-size:30px;
+  font-weight:700;
+  margin-top:28px;
+}
+
+/* RESPONSIVE */
+
+@media (max-height:760px){
+
+  .amount{
+    margin-top:55px;
+  }
+
+  .keypad{
+    margin-top:50px;
+  }
+
+  .row{
+    margin-bottom:38px;
+  }
+
+}
+
+@media (max-width:390px){
+
+  .top-bar{
+    padding:38px 20px 0;
+  }
+
+  .pay-btn{
+    height:70px;
+    font-size:28px;
+  }
+
+  .green-btn{
+    height:64px;
+    font-size:20px;
+  }
+
+  .middle-tab{
+    width:104px;
+    height:66px;
+    font-size:44px;
+  }
+
+  .title{
+    font-size:34px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+  <!-- TOP -->
+  <div class="top-bar">
+
+    <div class="scan-icon">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+
+    <div class="right-icons">
+
+      <!-- SEARCH -->
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+        <circle cx="14" cy="14" r="9" stroke="black" stroke-width="3.5"/>
+        <line x1="20.5" y1="20.5" x2="30" y2="30" stroke="black" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+
+      <!-- PROFILE -->
+      <div class="profile">
+        👤
+        <div class="badge">1</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- AMOUNT -->
+  <div class="amount" id="amountDisplay">$0</div>
+
+  <!-- KEYPAD -->
+  <div class="keypad">
+
+    <div class="row">
+      <div class="key">1</div>
+      <div class="key">2</div>
+      <div class="key">3</div>
+    </div>
+
+    <div class="row">
+      <div class="key">4</div>
+      <div class="key">5</div>
+      <div class="key">6</div>
+    </div>
+
+    <div class="row">
+      <div class="key">7</div>
+      <div class="key">8</div>
+      <div class="key">9</div>
+    </div>
+
+    <div class="row">
+      <div class="key">•</div>
+      <div class="key">0</div>
+      <div class="key">‹</div>
+    </div>
+
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="button-area">
+
+    <div class="top-buttons">
+      <button class="green-btn">Pool</button>
+      <button class="green-btn">Request</button>
+    </div>
+
+    <button class="pay-btn" id="payBtn">Pay</button>
+
+    <div class="bottom-nav">
+      <div style="font-size:42px;">⌂</div>
+      <div class="middle-tab">$</div>
+      <div style="font-size:38px;">◷</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- SHEET -->
+<div class="sheet" id="sheet">
+
+  <div class="handle"></div>
+
+  <div class="close" id="closeBtn">×</div>
+
+  <div class="title">
+    Pay <span id="sheetAmount">$0</span> <span>to</span>
+  </div>
+
+  <div class="search-wrapper">
+
+    <div class="search-box">
+      <input type="text" id="cashtagInput" placeholder="Name, $cashtag, email, phone">
+    </div>
+
+    <div class="pay-mini" id="payMini">$</div>
+
+  </div>
+
+  <div class="email-box">
+    <input type="email" id="emailInput" placeholder="Email">
+  </div>
+
+  <button class="final-pay" id="finalPayBtn">Pay</button>
+
+  <div class="contacts-title" style="margin-top:35px;">Contacts</div>
+
+  <div id="contacts"></div>
+
+</div>
+
+<script>
+
+/* USERS */
+
+const users = [
+{
+name:"Kellen Bates",
+phone:"(510) 359-1602",
+tag:"$Voidosu",
+email:"kellen@example.com",
+color:"#4169f1",
+letter:"K"
+},
+{
+name:"Julia Wilson",
+phone:"(205) 587-1012",
+tag:"$JuliaW",
+email:"julia@example.com",
+color:"#b144ff",
+letter:"J"
+},
+{
+name:"Haylee Walls",
+phone:"(610) 742-7452",
+tag:"$HayleeWalls",
+email:"haylee@example.com",
+color:"#43dec0",
+letter:"H"
+}
+];
+
+/* AMOUNT */
+
+let amount = "";
+
+const amountDisplay = document.getElementById("amountDisplay");
+
+function formatAmount(raw){
+
+if(raw === "") return "$0";
+
+const parts = raw.split(".");
+const intPart = parts[0];
+const decPart = parts.length > 1 ? "." + parts[1] : "";
+
+const formatted = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+return "$" + formatted + decPart;
+
+}
+
+/* KEYPAD */
+
+document.querySelectorAll(".key").forEach(key=>{
+
+key.addEventListener("click",()=>{
+
+const value = key.innerText;
+
+if(value === "‹"){
+
+amount = amount.slice(0,-1);
+
+}else if(value === "•"){
+
+if(!amount.includes(".")){
+amount = amount === "" ? "0." : amount + ".";
+}
+
+}else{
+
+amount += value;
+
+}
+
+amountDisplay.innerText = formatAmount(amount);
+
+});
+
+});
+
+/* OPEN SHEET */
+
+const payBtn = document.getElementById("payBtn");
+const sheet = document.getElementById("sheet");
+const sheetAmount = document.getElementById("sheetAmount");
+
+payBtn.addEventListener("click",()=>{
+
+sheet.style.display="block";
+sheetAmount.innerText = amountDisplay.innerText;
+
+});
+
+/* CLOSE */
+
+document.getElementById("closeBtn").addEventListener("click",()=>{
+
+sheet.style.display="none";
+
+});
+
+/* CONTACTS */
+
+const contacts = document.getElementById("contacts");
+const cashtagInput = document.getElementById("cashtagInput");
+const emailInput = document.getElementById("emailInput");
+const payMini = document.getElementById("payMini");
+
+users.forEach(user=>{
+
+const div = document.createElement("div");
+
+div.className="contact";
+
+div.innerHTML = `
+<div class="avatar" style="background:${user.color}">
+${user.letter}
+</div>
+
+<div>
+<div class="contact-name">${user.name}</div>
+<div class="contact-sub">${user.phone}</div>
+</div>
+`;
+
+div.addEventListener("click",()=>{
+
+cashtagInput.value = user.name;
+emailInput.value = user.email;
+
+payMini.style.display = "flex";
+
+});
+
+contacts.appendChild(div);
+
+});
+
+/* PAY MINI */
+
+cashtagInput.addEventListener("input",()=>{
+
+if(cashtagInput.value.trim() !== ""){
+
+payMini.style.display = "flex";
+
+}else{
+
+payMini.style.display = "none";
+
+}
+
+});
+
+/* FINAL PAYMENT */
+
+document.getElementById("finalPayBtn").addEventListener("click",()=>{
+
+const name = cashtagInput.value.trim();
+
+if(name === "") return;
+
+document.body.innerHTML = `
+
+<div style="
+width:100%;
+min-height:100vh;
+background:#efefef;
+padding:120px 64px 40px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
+">
+
+<div>
+
+<div style="
+width:112px;
+height:112px;
+border-radius:50%;
+background:#00d632;
+display:flex;
+align-items:center;
+justify-content:center;
+">
+
+<svg width="54" height="54" viewBox="0 0 24 24" fill="none">
+<path d="M5 13L10 18L19 8"
+stroke="white"
+stroke-width="3.5"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+
+</div>
+
+<div style="
+margin-top:42px;
+font-size:clamp(42px,8vw,64px);
+line-height:1.15;
+font-weight:700;
+color:#222;
+letter-spacing:-2px;
+word-break:break-word;
+">
+
+You sent ${amountDisplay.innerText}<br>
+to ${name.toLowerCase()}
+
+</div>
+
+</div>
+
+<button onclick="location.reload()" style="
+width:100%;
+height:84px;
+border:none;
+border-radius:50px;
+background:#00d632;
+color:white;
+font-size:32px;
+font-weight:700;
+margin-bottom:40px;
+">
+Done
+</button>
+
+</div>
+
+`;
+
+});
+
+</script>
+
+</body>
+</html>
